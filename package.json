@@ -4,9 +4,9 @@
   "description": "Starter project for an ES6 RESTful Express API",
   "main": "dist",
   "scripts": {
-    "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
+    "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0 --expose-debug-as=v8debug --inspect=10.0.2.15\"",
     "build": "babel src -s -D -d dist --presets es2015,stage-0",
-    "start": "node dist",
+    "start": "node --inspect=10.0.2.15 dist",
     "prestart": "npm run -s build",
     "test": "eslint src"
   },
@@ -35,8 +35,11 @@
     "compression": "^1.5.2",
     "cors": "^2.7.1",
     "express": "^4.13.3",
+    "express-session": "^1.15.6",
     "morgan": "^1.8.0",
-    "resource-router-middleware": "^0.6.0"
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

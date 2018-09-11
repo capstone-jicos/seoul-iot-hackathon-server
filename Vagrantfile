@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
 
   # Forward 8080 port for web development
   config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 9229, host: 9229
 
   # Update apt Package Manager if OS is ubuntu
   config.vm.provision "shell", inline: <<-SHELL
