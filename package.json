@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0 --expose-debug-as=v8debug --inspect=10.0.2.15\"",
     "build": "babel src -s -D -d dist --presets es2015,stage-0",
-    "start": "node --inspect=10.0.2.15 dist",
+    "start": "node dist",
     "prestart": "npm run -s build",
     "test": "eslint src"
   },
