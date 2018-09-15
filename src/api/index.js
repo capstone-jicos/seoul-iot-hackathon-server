@@ -3,6 +3,7 @@ import { Router } from 'express';
 import facets from './facets';
 import session from './session-check';
 import UserModel from '../models/user';
+import deploy from '../config/deploy';
 import https from 'https';
 import qs from 'querystring';
 
@@ -34,7 +35,7 @@ export default ({ config, db }) => {
                 session.role = user.Role;
                 session.name = user.Name;
 
-                const redirect = `https://api.sandbox.thingplus.net/v2/oauth2/authorize?response_type=code&client_id=${ session.userid }&redirect_uri=http://13.125.247.123:8080/api/login/proc`;
+                const redirect = `https://api.sandbox.thingplus.net/v2/oauth2/authorize?response_type=code&client_id=${ session.userid }&redirect_uri=${ deploy.api }/api/login/proc`;
 
                 console.log(redirect);
                 res.status(200).send({
@@ -51,7 +52,7 @@ export default ({ config, db }) => {
             code: query.code,
             client_id: session.userid,
             client_secret: 'belt12!@',
-            redirect_uri: 'http://13.125.247.123:8080/api/login/proc',
+            redirect_uri: `${deploy.api}/api/login/proc`,
             grant_type: 'authorization_code'
         };
 
@@ -77,7 +78,7 @@ export default ({ config, db }) => {
                 let response = JSON.parse(body.toString());
                 console.log(response);
                 session.code = response.access_token;
-                res.redirect("http://13.125.247.123:8080");
+                res.redirect(deploy.front);
             });
         });
 
