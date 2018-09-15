@@ -55,13 +55,14 @@ function getSensorValue() {
                 buckled: buckled
             }, {
                 where: {
-                    id: 1
+                    id: 2
                 }
             }).then(affected => {
                 console.log(affected);
             });
         });
     });
+    requestAuthCode.end();
 
     options.path = '/v2/gateways/' + gatewayId + '/sensors/' + sensorId[1] + '/series';
     let requestAuthCode1 = https.request(options, (authRes) => {
@@ -87,7 +88,9 @@ function getSensorValue() {
             }
         });
     });
-
+    setTimeout(function () {
+        requestAuthCode1.end();
+    }, 200);
 
     options.path = '/v2/gateways/' + gatewayId + '/sensors/' + sensorId[2] + '/series';
     let requestAuthCode2 = https.request(options, (authRes) => {
@@ -113,6 +116,9 @@ function getSensorValue() {
             }
         });
     });
+    setTimeout(function () {
+        requestAuthCode2.end();
+    }, 300);
 
     options.path = '/v2/gateways/' + gatewayId + '/sensors/' + sensorId[3] + '/series';
     let requestAuthCode3 = https.request(options, (authRes) => {
@@ -138,7 +144,9 @@ function getSensorValue() {
             }
         });
     });
-
+    setTimeout(function () {
+        requestAuthCode3.end();
+    }, 400);
     options.path = '/v2/gateways/' + gatewayId + '/sensors/' + sensorId[4] + '/series';
     let requestAuthCode4 = https.request(options, (authRes) => {
         let chunks = [];
@@ -159,7 +167,8 @@ function getSensorValue() {
                 let override = null;
                 console.log(affected);
 
-                if (seated !== false) {
+                if (response.data.latest.value >= 100) {
+                    seated = true;
                     override = false;
                 }
 
@@ -174,18 +183,11 @@ function getSensorValue() {
                     console.log(affected);
                 });
             });
-
-            if (response.data.latest.value >= 100) {
-                seated = true;
-            }
         });
     });
-
-    requestAuthCode.end();
-    requestAuthCode1.end();
-    requestAuthCode2.end();
-    requestAuthCode3.end();
-    requestAuthCode4.end();
+    setTimeout(function () {
+        requestAuthCode4.end();
+    }, 500);
 }
 
 getSensorValue();
