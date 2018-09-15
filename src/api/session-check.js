@@ -1,5 +1,7 @@
-export default (req, res) => {
-    if (req.session.userIndex === undefined) {
+export default (session, res) => {
+    console.log(session);
+
+    if (session.authorized !== true) {
         res.sendStatus(401);
         return false;
     } else {

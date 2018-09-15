@@ -1,14 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    Index: {
+  const User = sequelize.define('user', {
+    index: {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    ID: DataTypes.STRING,
-    PW: DataTypes.STRING,
-    Name: DataTypes.STRING,
-    Role: DataTypes.STRING
+    userid: DataTypes.STRING,
+    password: DataTypes.STRING,
+    name: DataTypes.STRING,
+    role: DataTypes.STRING
   }, {
       timestamps: false,
       freezeTableName: true

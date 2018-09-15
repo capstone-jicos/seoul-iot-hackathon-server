@@ -40,7 +40,7 @@ export default ({config, db}) => {
         }, {
             where: {id: params.id}
         }).then(affected => {
-            res.json(JSON.stringify({"afftected": affected}));
+            res.json({"afftected": affected[0]});
         });
     });
 

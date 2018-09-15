@@ -37,7 +37,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
-    secret: 'test secret for hackathon'
+    secret: 'test secret for hackathon',
+    maxAge: 3600000
 }));
 
 // internal middleware
