@@ -4,9 +4,6 @@ const SensorModel = require('../dist/models/sensor-value');
 const SeatModel = require('../dist/models/seat');
 const https = require('https');
 
-let seated = false;
-let buckled = false;
-
 const gatewayId = "0165dca5e6d900000000000100100186";
 const sensorId = [
     "conductivity-0165dca5e6d900000000000100100186-0",
@@ -27,6 +24,9 @@ const options = {
 };
 
 function getSensorValue() {
+    let seated = false;
+    let buckled = false;
+
     options.path = '/v2/gateways/' + gatewayId + '/sensors/' + sensorId[0] + '/series';
     let requestAuthCode = https.request(options, (authRes) => {
         let chunks = [];
@@ -191,4 +191,4 @@ function getSensorValue() {
 }
 
 getSensorValue();
-setInterval(getSensorValue, 1000 * 60);
+setInterval(getSensorValue, 1000 * 20);
