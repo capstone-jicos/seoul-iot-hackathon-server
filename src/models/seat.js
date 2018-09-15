@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     busId: DataTypes.INTEGER,
     seatNum: DataTypes.STRING,
     seated: DataTypes.BOOLEAN,
-    buckled: DataTypes.BOOLEAN
+    buckled: DataTypes.BOOLEAN,
+    override: DataTypes.BOOLEAN
   }, {
       freezeTableName: true,
       timestamps: false

@@ -17,9 +17,9 @@ export default ({ config, db }) => {
 
     // perhaps expose some API metadata at the root
     api.get('/', ({session}, res) => {
-        if (sessionCheck(session, res)) {
+        // if (sessionCheck(session, res)) {
             res.sendStatus(200);
-        }
+        // }
     });
 
     api.post('/login', ({body, session}, res) => {

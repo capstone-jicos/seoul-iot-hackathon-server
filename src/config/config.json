@@ -2,6 +2,6 @@
     "port": 8080,
     "bodyLimit": "100kb",
     "corsHeaders": ["Link"],
-    "corsOrigin": "http://localhost:3000",
+    "corsOrigin": ["http://localhost:3000", "http://985b087b.ngrok.io"],
     "corsCredential": true
 }
