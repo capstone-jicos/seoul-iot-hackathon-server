@@ -4,13 +4,13 @@ const SensorModel = require('../dist/models/sensor-value');
 const SeatModel = require('../dist/models/seat');
 const https = require('https');
 
-const gatewayId = "0165dca5e6d900000000000100100186";
+const gatewayId = "0165e02d109900000000000100100147";
 const sensorId = [
-    "conductivity-0165dca5e6d900000000000100100186-0",
-    "number-0165dca5e6d900000000000100100186-0",
-    "number-0165dca5e6d900000000000100100186-1",
-    "number-0165dca5e6d900000000000100100186-2",
-    "number-0165dca5e6d900000000000100100186-3"
+    "conductivity-0165e02d109900000000000100100147-0",
+    "number-0165e02d109900000000000100100147-0",
+    "number-0165e02d109900000000000100100147-1",
+    "number-0165e02d109900000000000100100147-2",
+    "number-0165e02d109900000000000100100147-3"
 ];
 
 const options = {
