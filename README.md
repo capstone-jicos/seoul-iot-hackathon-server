@@ -1,57 +1,33 @@
-Express & ES6 REST API Boilerplate
-==================================
+# 가디언즈 오브 벨트
 
-This is a straightforward boilerplate for building REST APIs with ES6 and Express.
+## 프로젝트 소개
 
-- ES6 support via [babel](https://babeljs.io)
-- REST resources as middleware via [resource-router-middleware](https://github.com/developit/resource-router-middleware)
-- CORS support via [cors](https://github.com/troygoode/node-cors)
-- Body Parsing via [body-parser](https://github.com/expressjs/body-parser)
+안전띠 미착용 상태에서 차량 사고가 발생할 경우 상해 가능성이 18배가 높아진다고 한다. 또한, 밖으로 튕겨져 나갔을 때 사망 확률이 25배나 높아진다고 한다. 사람들은 사태의 심각성을 알면서도 불편하거나 귀찮다는 이유로 생명과도 직결되는 안전띠를 중요하게 생각하지 않는다. 이에 정부에서는 오는 9월부터 ‘전 차량, 전 좌석 안전띠 의무화’ 정책을 내세웠지만, 40석이 넘는 시외,고속버스의 경우 이를 일일이 검사한다는 것은 어렵다. 그래서 안전띠에 센서를 부착하여 탑승자 모두가 안전띠를 올바르게 착용하고 있는지 자동으로 감지하고자 한다. 더불어, 어린이 탑승차량에서 일어나는 문제들을 해결할 수 있다. 예를 들어, 버스의 백미러 사각지대로 인해 아이들이 교통사고를 당하거나, 차량 안에 방치되는 경우도 있었다. 만약 안전띠를 착용했는지 감지하는 센서가 있었다면, 학생들의 위치를 간접적으로 확인할 수 있었을 것이며, 이를 통해 인명피해를 줄일 수 있을 것이다.
 
-> Tip: If you are using [Mongoose](https://github.com/Automattic/mongoose), you can automatically expose your Models as REST resources using [restful-mongoose](https://git.io/restful-mongoose).
+버스 회사(혹은 기사)의 경우 안전띠 미착용 승객이 있다면, 과태료를 내야하지만 광역 버스의 경우 승하차지마다 그리고 고속도로를 지나는 동안 안전띠 미착용 승객을 관리하기 힘들다. 만약 이런 상태에서 교통사고가 발생할 경우 큰 인명피해로 이어지며, 그에 따른 보상은 버스 회사와 기사가가 책임져야 하고 보상해야하는 승객들이 많을 경우 이는 큰 금전적 손실로 이어질 수 있다. . 버스회사가 우리 서비스를 사용하면, 전좌석 안전띠 착용을 장려할 수 있어 유사시에도 인명 및 재정적 피해를 최소화할 수 있다. 더불어, 사측의 지속적 안내에도 불구하고 안전띠를 착용하지 않은 승객에 대한 책임을 분명히 할 수 있어, 사측의 사고에 대한 책임을 어느정도 경감할 수 있을 것이다.
+
+## 기술스택
+
+* 임베디드 보드 ([Github](https://github.com/capstone-jicos/seoul-iot-hackathon))
+* 어플리케이션 서버
+  * Ubuntu 18.04 Xenial
+  * Node.js v10.11.0
+  * MySQL Community Edition
+  * [Daliworks Thingplus](https://thingplus.net/en/) REST API
+* 데모용 웹페이지 ([Github](https://github.com/capstone-jicos/seoul-iot-hackathon-front))
+  * HTML / CSS / Javascript
+  * jQuery (일부)
+  * Core UI Admin Temaplte ([링크](https://github.com/coreui/coreui-free-bootstrap-admin-template-ajax))
+
+## 서버 어플리케이션 개요
+
+가디언즈 오브 벨트 서비스를 운영하기 위한 서버 어플리케이션으로, 각 임베디드 보드로부터 전송된 좌석들의 센서 정보를 처리해 각 자리의 착석 여부를 확인한다. 이러한 데이터들은 arm Mbed OS를 활용해 Cloud에 먼저 전송되며, ThingPlus에 각 센서별로 사용할 수 있도록 가공되어 저장된다. 어플리케이션 서버는 ThingPlus에서 제공하는 REST API를 활용하여 가공된 데이터들을 가져오고, 이를 다시 클라이언트들에게 REST API 형태로 제공하여 웹페이지를 비롯해 버스 내 기사용 단말기에서도 활용이 가능한 형태로 제공될 수 있다는 가능성을 보여줬다. 
+
+만약 착석해있지만, 벨트 착용이 되어있지 않을 경우, 해당 버스의 화면에서 이에 대한 시각적 알림(해당 좌석에 빨간색으로 깜박거림)을 주었으며, 기사가 원할 경우 좌석벨트 착용 알림을 수동으로 방송할 수 있는 기능을 제공하였다.
+
+## 데모 발표
+
+http://www.youtube.com/watch?v=CVrJXasqSlg&t=58m36s
 
 
 
-Getting Started
----------------
-
-```sh
-# clone it
-git clone git@github.com:developit/express-es6-rest-api.git
-cd express-es6-rest-api
-
-# Make it your own
-rm -rf .git && git init && npm init
-
-# Install dependencies
-npm install
-
-# Start development live-reload server
-PORT=8080 npm run dev
-
-# Start production server:
-PORT=8080 npm start
-```
-Docker Support
-------
-```sh
-cd express-es6-rest-api
-
-# Build your docker
-docker build -t es6/api-service .
-#            ^      ^           ^
-#          tag  tag name      Dockerfile location
-
-# run your docker
-docker run -p 8080:8080 es6/api-service
-#                 ^            ^
-#          bind the port    container tag
-#          to your host
-#          machine port   
-
-```
-
-License
--------
-
-MIT
